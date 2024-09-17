@@ -1,1 +1,28 @@
-Thanks for taking a moment to look at my computer graphics projects! It is great to see you here!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>William Dwyer's Computer Graphics Projects</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Include your styles -->
+</head>
+<body>
+    <div class="container">
+      <h1>William Dwyer's Computer Graphics Projects</h1>
+
+      <!-- Embed a chosen project here using an iframe -->
+      <div class="project-display">
+        <h2>Featured Project</h2>
+        <iframe id="project-iframe" src="pacman-animation/pacman-animation.html" width="100%" height="500px"></iframe>
+      </div>
+
+      <!-- Buttons to dynamically load each project -->
+      <div class="buttons">
+        <button class="card-button" onclick="loadProject('pacman-animation/pacman-animation.html')">Pacman Animation</button>
+        <button class="card-button" onclick="loadProject('project2-folder/project2.html')">Project 2</button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
