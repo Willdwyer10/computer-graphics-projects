@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+canvas {
+  border: 1px solid black;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.slider-box {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+label {
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}
