@@ -10,6 +10,7 @@ body {
 
 canvas {
   border: 1px solid black;
+  max-width: 100%;
 }
 
 .slider-container {
