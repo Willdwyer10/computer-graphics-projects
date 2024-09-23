@@ -2,13 +2,13 @@
  * Contains functions related to drawing and moving Pac-Man
  */
 
-var canvas, context; // Environmental variables
+let canvas, context; // Environmental variables
 
-var slider_size, slider_speed_x, slider_speed_y; // Slider objects
+let slider_size, slider_speed_x, slider_speed_y; // Slider objects
 
-var pacManPadding, minX, minY, maxX, maxY, currX, currY, isMovingRight, isMovingDown, xChangeRate, yChangeRate; // Variables for Pacman translational movements
+let pacManPadding, minX, minY, maxX, maxY, currX, currY, isMovingRight, isMovingDown, xChangeRate, yChangeRate; // Variables for Pacman translational movements
 
-var mouthAngleMax, mouthAngleMin, mouthAngle, mouthAngleIncreasing, mouthAngleChangeRate; // Variables for Pacman mouth
+let mouthAngleMax, mouthAngleMin, mouthAngle, mouthAngleIncreasing, mouthAngleChangeRate; // Variables for Pacman mouth
 
 /**
  * Initialize the environemental variables and all of the variables enabling translational, rotational, and mouth movements
@@ -73,7 +73,7 @@ function drawPacManEye() {
  */
 function drawPacMan() {
     // Find the angle Pac-Man should be rotated to
-    var rotation_angle = Math.atan(Number(yChangeRate)/Number(xChangeRate)); // Angle of right triangle with base xChangeRate, height yChangeRate
+    let rotation_angle = Math.atan(Number(yChangeRate)/Number(xChangeRate)); // Angle of right triangle with base xChangeRate, height yChangeRate
     if(isMovingDown ^ isMovingRight) rotation_angle *= -1; // Correct the sign when moving up-right or down-left
     
     // Move Pac-Man around by changing the context

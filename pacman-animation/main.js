@@ -2,11 +2,11 @@
  * Handles the setup and animation loop
  */
 
-var canvas, context; // Environmental variables
+let canvas, context; // Environmental variables
 
 function setup() {
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
 
     initUtils(canvas, context);
     initPacman(canvas, context);

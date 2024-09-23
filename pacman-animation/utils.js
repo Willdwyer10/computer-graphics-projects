@@ -2,7 +2,7 @@
  * Contains utility functions for drawing static objects
  */
 
-var canvas, context; // Environmental variables
+let canvas, context; // Environmental variables
 
 /**
  * Initialize the environmental variables
@@ -17,7 +17,7 @@ function initUtils(canvasIn, contextIn) {
  */
 function drawStraightPipe(x, y, length, isHorizontal) {
     // Corner radius
-    var radius = 10;
+    let radius = 10;
     
     // Save the context state
     context.save();
@@ -60,9 +60,9 @@ function drawStraightPipe(x, y, length, isHorizontal) {
  */
 function drawTPipe(x, y, length, fingerLength, isHorizontal, isFlipped) {
     
-    var radius = 10; // Corner radius
+    let radius = 10; // Corner radius
 
-    var fingerX = length / 2; // Where the finger sticks out from
+    let fingerX = length / 2; // Where the finger sticks out from
 
     context.save(); // Save the context state
 
