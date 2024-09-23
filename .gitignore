@@ -1,2 +1,5 @@
 # Ignore files used for turning in coursework
 *.zip
+
+# This project was just for me to gain an understanding of the scaling function
+scaling-demo/
