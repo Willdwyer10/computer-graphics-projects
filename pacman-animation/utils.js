@@ -2,16 +2,6 @@
  * Contains utility functions for drawing static objects
  */
 
-let canvas, context; // Environmental variables
-
-/**
- * Initialize the environmental variables
- */
-function initUtils(canvasIn, contextIn) {
-    canvas = canvasIn;
-    context = contextIn;
-}
-
 /**
  * Draw a straight pipe
  */

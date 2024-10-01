@@ -2,8 +2,6 @@
  * Contains functions related to drawing and moving Pac-Man
  */
 
-let canvas, context; // Environmental variables
-
 let slider_size, slider_speed_x, slider_speed_y; // Slider objects
 
 let pacManPadding, minX, minY, maxX, maxY, currX, currY, isMovingRight, isMovingDown, xChangeRate, yChangeRate; // Variables for Pacman translational movements
@@ -11,11 +9,9 @@ let pacManPadding, minX, minY, maxX, maxY, currX, currY, isMovingRight, isMoving
 let mouthAngleMax, mouthAngleMin, mouthAngle, mouthAngleIncreasing, mouthAngleChangeRate; // Variables for Pacman mouth
 
 /**
- * Initialize the environemental variables and all of the variables enabling translational, rotational, and mouth movements
+ * Initialize the variables enabling translational, rotational, and mouth movements
  */
-function initPacman(canvasIn, contextIn) {
-    canvas = canvasIn;
-    context = contextIn;
+function initPacman() {
 
     slider_size = document.getElementById('slider_size')
     slider_size.value = (Number(slider_size.max) + Number(slider_size.min)) / 2; // Set the slider to its halfway point

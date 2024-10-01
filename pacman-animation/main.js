@@ -5,11 +5,10 @@
 let canvas, context; // Environmental variables
 
 function setup() {
-    let canvas = document.getElementById('canvas');
-    let context = canvas.getContext('2d');
+    canvas = document.getElementById('canvas');
+    context = canvas.getContext('2d');
 
-    initUtils(canvas, context);
-    initPacman(canvas, context);
+    initPacman();
 }
 
 /**
