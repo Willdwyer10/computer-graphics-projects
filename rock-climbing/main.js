@@ -13,6 +13,10 @@ class App {
 
     draw() {
         this.canvas.width = this.canvas.width; // de facto method to clear canvas
+        // Draw background
+        this.context.fillStyle = 'lightblue';
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
         this.holdManager.drawHolds();
 
         window.requestAnimationFrame(() => this.draw()); // create animation loop
