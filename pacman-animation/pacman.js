@@ -8,6 +8,8 @@ let pacManPadding, minX, minY, maxX, maxY, currX, currY, isMovingRight, isMoving
 
 let mouthAngleMax, mouthAngleMin, mouthAngle, mouthAngleIncreasing, mouthAngleChangeRate; // Variables for Pacman mouth
 
+let eyeAngle;
+
 /**
  * Initialize the variables enabling translational, rotational, and mouth movements
  */
@@ -41,27 +43,45 @@ function initPacman() {
     mouthAngle = 1/4; // The current angle of the mouth (fraction of pi)
     mouthAngleIncreasing = false; // A flag whether the mouth is getting bigger or smaller
     mouthAngleChangeRate =  (xChangeRate + yChangeRate) / 100; // The rate the mouth opens and closes at
+    eyeAngle = 0;
+}
+
+/**
+ * Draw Pac-Man's eye's pupil
+ */
+function drawPacManEyePupil() {
+    const radius = 4; // Radius of the eye
+
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.arc(0, 0, radius, 0, Math.PI * 2);
+    context.closePath();
+    context.fillStyle = 'white';
+    context.fill();
+
 }
 
 /**
  * Draw Pac-Man's eye
  */
 function drawPacManEye() {
-    // Set up parameters for the eye's location
-    const centerX = 0; // X-coordinate of the center of the eye
-    const centerY = -20; // Y-coordinate of the center of the eye
-    const radius = 5; // Radius of the eye
+    const radius = 8; // Radius of the eye
 
     // Set up the styling
     context.fillStyle = "black"; // Fill it with black
 
     // Draw the pie shape
     context.beginPath(); // Make sure we isolate this path
-    context.moveTo(centerX, centerY);  // Start at the center
-    context.arc(centerX, centerY, radius, 0, Math.PI*2);  // Create the full circle
+    context.moveTo(0, 0);  // Start at the center
+    context.arc(0, 0, radius, 0, Math.PI*2);  // Create the full circle
     context.closePath();  // Draw a line back to the center
     context.fill();  // Fill the pie shape
     context.stroke();  // Add an outline
+
+    context.save();
+    context.translate(radius/2, 0);
+    drawPacManEyePupil();
+    context.restore();
 }
 
 /**
@@ -107,8 +127,19 @@ function drawPacManInternal() {
     context.fill();  // Fill the pie shape
     context.stroke();  // Add an outline
 
-    // Draw the eye on top of it
+    // Draw the eye on top of it (rotate the eyeball)
+    context.save();
+    context.translate(-20, -20);
+    context.rotate(eyeAngle);
     drawPacManEye();
+    context.restore();
+
+    // Draw the second eye (rotate in the opposite direction)
+    context.save();
+    context.translate(5, -20);
+    context.rotate((Math.PI * 2) - eyeAngle);
+    drawPacManEye();
+    context.restore();
 }
 
 /**
@@ -118,7 +149,6 @@ function movePacMan() {
     // Set the rates of translational movement based on the slider value
     xChangeRate = slider_speed_x.value / 1000;
     yChangeRate = slider_speed_y.value / 1000;
-
     
     // Update the bounds of the allowable area so Pac-Man always reaches the edges
     pacManPadding = 25 + ((slider_size.value - 500) / (1000 - 500))*(50-25); // Scale from the range of the slider to the range of padding needed
@@ -150,6 +180,9 @@ function movePacMan() {
     } else if (currY <= minY) {
         isMovingDown = true;
     }
+
+    // Rotate the eyeballs
+    eyeAngle += 0.1;
 }
 
 /**
