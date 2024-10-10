@@ -1,0 +1,102 @@
+/* General body styling */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #e9ecef; /* Light modern gray */
+  color: #333; /* Darker text color for better readability */
+}
+
+/* Canvas styling */
+canvas {
+  border: 2px solid #343a40; /* Slightly thicker dark border */
+  border-radius: 8px; /* Rounded corners for modern look */
+  max-width: 100%;
+  background-color: #fff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+}
+
+/* Container for sliders and button */
+.slider-container {
+  display: flex;
+  justify-content: space-around; /* Evenly spaced */
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f8f9fa; /* Light background for contrast */
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual slider box styling */
+.slider-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Label styling */
+label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #495057; /* Slightly darker gray text */
+  margin-bottom: 8px;
+}
+
+/* Slider styling */
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  background: #dee2e6; /* Light gray track */
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff; /* Blue thumb for better visibility */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #0056b3; /* Darker blue on hover */
+}
+
+/* Button styling */
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #28a745; /* Green button for action */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slight zoom on hover for effect */
+}
+
+button:active {
+  transform: scale(1); /* Reset zoom on click */
+}
+
+

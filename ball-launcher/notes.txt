@@ -1,0 +1,4 @@
+Future development:
+The ball size could be a parameter, could be variable/randomized
+Gravity could be changed using a slider
+

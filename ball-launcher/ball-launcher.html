@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ball launching simulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <h1>Ball Launching Simulation</h1>
+    <h4>Move the sliders to adjust launch angle and speed, hit the button to launch!</h4>
+    <canvas id="canvas" width="800" height="350"></canvas>
+
+    <div class="slider-container">
+        <div class="slider-box">
+          <label for="slider_angle">Angle</label>
+          <input id="slider_angle" type="range" min="0" max="1500" />
+        </div>
+  
+        <div class="slider-box">
+          <label for="slider_speed">Speed</label>
+          <input id="slider_speed" type="range" min="500" max="1000" />
+        </div>
+
+        <div class="slider-box">
+          <label for="button_launch"></label>
+          <button id="button_launch">Launch</button>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+    <script type="text/javascript" src="gl-matrix-min.js"></script>
+  </body>
+</html>
