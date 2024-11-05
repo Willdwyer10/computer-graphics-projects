@@ -25,10 +25,11 @@ canvas {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: flex-start;
-  width: 100%;
+  width: 90%;
   max-width: 800px;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: #25244c; /* Slightly lighter background for contrast */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -39,7 +40,7 @@ canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
   padding: 10px;
   width: 100%;
   max-width: 180px;

@@ -7,7 +7,7 @@
 let HermiteCurve = class HermiteCurve {
     // pass in null for previousCurve if this is the first curve in the series
     constructor(previousCurve, nextCurve) {
-        let width = 300;
+        let width = 450;
         let height = 300;
         let depth = 300;
 

@@ -11,7 +11,7 @@ let Camera = class Camera {
 
     getEyeLocation() {
         let distanceFromWorldCoordinateOrigin = this.sliderCameraDistance.value;
-        let verticalMovementDistance = 50;
+        let verticalMovementDistance = 30;
         let verticalMovementCenter = 75;
         let angle = Math.PI*this.t*0.25;
 
@@ -33,7 +33,7 @@ let Camera = class Camera {
 
     getTransformViewport() {
         let Tviewport = mat4.create();
-        mat4.fromTranslation(Tviewport, [150, 150, 0]);
+        mat4.fromTranslation(Tviewport, [225, 175, 0]);
         mat4.scale(Tviewport, Tviewport, [100, -100, 100]); // flip y axis
         return Tviewport;
     }
