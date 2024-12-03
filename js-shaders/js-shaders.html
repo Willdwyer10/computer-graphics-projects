@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Shader and Selecters</title>
+</head>
+
+<body>
+    <script id="vertexShaderSimple" type="not-js">
+        attribute vec3 vPosition;
+        attribute vec3 vColor;
+        varying vec3 fColor;
+        uniform mat4 uMVP;
+        uniform float time;
+  
+        void main(void) {
+            gl_Position = uMVP * vec4(vPosition, 0.5*sin(time*1.0)+1.0);
+            fColor = vColor;
+        }
+    </script>
+
+    <script id="fragmentShaderSimple" type="not-js">
+        precision highp float;
+        varying vec3 fColor;
+        uniform float time;
+
+        void main(void) {
+            gl_FragColor = vec4(fColor.x * 0.8*sin(time*4.0), fColor.y * 0.2*sin(time*3.0), fColor.z * 0.5*sin(time*6.0), 1.0);
+        }
+    </script>
+  
+    <script id="vertexShader" type="not-js">
+        attribute vec3 vPosition;
+        attribute vec3 vNormal;
+        attribute vec3 vColor;
+        varying vec3 fPosition;
+        varying vec3 fNormal;
+        uniform mat4 uMV;
+        uniform mat4 uMVP;
+        uniform float time;
+    
+        vec2 Rotate2D(vec2 vec_in, float angle) {
+            vec2 vec_out;
+            vec_out.x = cos(angle) * vec_in.x - sin(angle) * vec_in.y;
+            vec_out.y = sin(angle) * vec_in.x + cos(angle) * vec_in.y;
+            return vec_out;
+        }
+    
+        void main(void) {
+            vec3 modelX = vPosition;
+            vec3 modelN = vNormal;
+            modelX.xz = Rotate2D(modelX.xz, 0.25 * 3.14 * modelX.y * sin(2.0 * time));
+            modelX.yz = Rotate2D(modelX.yz, 0.25 * 3.14 * modelX.y * sin(5.0 * time));
+            modelX.xy = Rotate2D(modelX.xy, 0.25 * 3.14 * modelX.y * sin(0.5 * time));
+            modelN.xz = Rotate2D(modelN.xz, 0.5 * 3.14 * modelX.y * sin(0.5 * time));
+            modelN.yz = Rotate2D(modelN.yz, 0.5 * 3.14 * modelX.y * sin(0.5 * time));
+            modelN.xy = Rotate2D(modelN.xy, 0.5 * 3.14 * modelX.y * sin(0.5 * time));
+    
+            gl_Position = uMVP * vec4(modelX, 1.0);
+            fPosition = (uMV * vec4(modelX, 1.0)).xyz; // In camera coordinates
+            fNormal = modelN; // In local coordinates
+        }
+    </script>
+
+    <script id="fragmentShader" type="not-js">
+        precision highp float;
+        varying vec3 fPosition;
+        varying vec3 fNormal;
+        uniform mat3 uMVn;
+        uniform float time;
+    
+        void main(void) {
+            vec3 n = normalize(uMVn * fNormal);
+    
+            // Ambient lighting
+            vec3 baseColor = vec3(fPosition.x * 0.5 + 0.5, fPosition.y * 0.5 + 0.5, fPosition.z * 0.5 + 0.5);
+            vec3 ambient_color = 0.05 * baseColor;
+    
+            // Specular lights
+            vec3 specDir1 = vec3(-cos(time*10.0), 4.0 * sin(2.0 * time), sin(2.0 * time) + 3.14 / 2.0);
+            vec3 specDir2 = vec3(56.0 * cos(20.0 * time), 1.0, -sin(1.5 * time));
+            vec3 l_1 = normalize(specDir1);
+            vec3 l_2 = normalize(specDir2);
+            vec3 h_1 = normalize(normalize(-fPosition) + l_1);
+            vec3 h_2 = normalize(normalize(-fPosition) + l_2);
+            vec3 specCol1 = pow(max(0.0, dot(n, h_1)), 32.0) * vec3(1.0, 1.0, 1.0);
+            vec3 specCol2 = pow(max(0.0, dot(n, h_2)), 32.0) * vec3(1.0, 1.0, 1.0);
+    
+            // Diffuse lights
+            vec3 difDir1 = vec3(cos(0.2 * time), 1.0, sin(1.5 * time));
+            vec3 difDir2 = vec3(sin(2.0 * time), 1.0, sin(0.1 * time));
+            vec3 difDir3 = vec3(-sin(0.2 * time), 1.0, -cos(0.1 * time));
+            float diffuse1 = pow(dot(n, difDir1), 3.0);
+            float diffuse2 = pow(dot(n, difDir2), 10.0);
+            float diffuse3 = pow(dot(n, difDir3), 2.0);
+            vec3 difCol1 = diffuse1 * vec3(1.0, 0, 0);
+            vec3 difCol2 = diffuse2 * vec3(0, 0.2, 78);
+            vec3 difCol3 = diffuse3 * vec3(0.1, 1.0, 0);
+    
+            // Combine all lighting components
+            vec3 finalColor = ambient_color + specCol1 + specCol2 + difCol1 + difCol2 + difCol3;
+            gl_FragColor = vec4(finalColor, 1.0);
+    
+            // Discard some random parts of the model
+            if (sin(0.5 * fPosition.x) > 0.9 && sin(0.3 * fPosition.y) > 0.1) discard;
+        }
+    </script>
+
+    <canvas id="mycanvas" width="500" height="500"></canvas>
+
+    <br>
+
+    <input id="slider1" type="range" min="-100" max="100" />
+    <input id="slider2" type="range" min="-100" max="100" />
+    <input id="slider3" type="range" min="20" max="300" />
+
+    <br>    
+    <label for="simpleExample">Show a simple example with a different shader:</label>
+    <input type="checkbox" id="simpleExample" name="simpleExample">
+    <br>
+
+    <label for="modelSelect">Choose a model:</label>
+    <select id="modelSelect">
+      <option value="shamrock">Shamrock</option>
+      <option value="nationalParkRanger">National Park Ranger</option>
+      <option value="sofa">Sofa</option>
+      <option value="basketballHoop">Basketball Hoop</option>
+      <option value="potGold">Pot of Gold</option>
+    </select>
+
+    <script src="main.js" id="module"></script>
+    <script type="text/javascript" src="gl-matrix-min.js"></script>
+
+    <script id="sofa" src="./js-objs/sofa.js"></script>
+    <script id="potGold" src="./js-objs/potGold.js"></script>
+    <script id="basketballHoop" src="./js-objs/basketballHoop.js"></script>
+    <script id="nationalParkRanger" src="./js-objs/nationalParkRanger.js"></script>
+    <script id="shamrock" src="./js-objs/shamrock.js"></script>
+</body>
+
+</html>
